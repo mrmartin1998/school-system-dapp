@@ -1,0 +1,21 @@
+1. Creating a Feature Branch:
+
+git checkout -b feature/branch-name
+
+2. Pushing the branch to remote:
+
+git push -u origin feature/branch-name
+
+3. Creating a hotfix branch:
+
+git checkout -b hotfix/branch-name
+
+4. Merging branches:
+
+git checkout master
+git merge feature/branch-name
+git push origin master
+
+Delete branch
+
+git branch -d feature/branch-name
