@@ -25,4 +25,9 @@ contract StudentRegistration {
         require(_id > 0 && _id <= studentCount, "Student does not exist.");
         return students[_id];
     }
+
+    function isStudentRegistered(uint256 _studentId) public view returns (bool) {
+        return (_studentId > 0 && _studentId <= studentCount);
+    }
+
 }
