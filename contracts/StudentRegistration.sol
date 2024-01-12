@@ -25,9 +25,4 @@ contract StudentRegistration {
         require(_id > 0 && _id <= studentCount, "Student does not exist.");
         return students[_id];
     }
-
-    function getStudentId(address _address) public view returns (uint256) {
-        require(studentIds[_address] != 0, "Student does not exist.");
-        return studentIds[_address];
-    }
 }
