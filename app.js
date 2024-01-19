@@ -19,7 +19,7 @@ window.addEventListener('load', async () => {
     }
 
     // Your deployed contract addresses
-    const studentRegistrationAddress = '0x86aAC8aC14C68CA406A5e8312426Cb3a4ce3D581';
+    const studentRegistrationAddress = '0x61d8fEC7E5E752aAa4D80E577E4131E6783F80DA';
 
     // The ABI for your contracts
     const studentRegistrationABI =  [
