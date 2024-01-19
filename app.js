@@ -3,9 +3,8 @@ window.addEventListener('load', async () => {
     if (window.ethereum) {
         window.web3 = new Web3(ethereum);
         try {
-            // Request account access if needed
-            await ethereum.enable();
-            // Acccounts now exposed, you can start interacting with contracts
+            // Request account access
+            await ethereum.request({ method: 'eth_requestAccounts' });
         } catch (error) {
             console.error("User denied account access...");
         }
@@ -13,7 +12,6 @@ window.addEventListener('load', async () => {
     // Legacy dapp browsers...
     else if (window.web3) {
         window.web3 = new Web3(web3.currentProvider);
-        // Acccounts always exposed, you can start interacting with contracts
     }
     // Non-dapp browsers...
     else {
@@ -21,11 +19,10 @@ window.addEventListener('load', async () => {
     }
 
     // Your deployed contract addresses
-    const studentRegistrationAddress = '0xe3417112C67516F8198d3FB2586721d05F461BC4';
-    // Add other contract addresses
+    const studentRegistrationAddress = '0x86aAC8aC14C68CA406A5e8312426Cb3a4ce3D581';
 
     // The ABI for your contracts
-    const studentRegistrationABI = [
+    const studentRegistrationABI =  [
         {
           "anonymous": false,
           "inputs": [
@@ -185,12 +182,10 @@ window.addEventListener('load', async () => {
           "type": "function",
           "constant": true
         }
-      ]; // Add ABI
-    // Add other ABIs
+      ];
 
     // Contract instances
     const studentRegistration = new web3.eth.Contract(studentRegistrationABI, studentRegistrationAddress);
-    // Add other contract instances
 
     // UI Elements
     const registerStudentBtn = document.getElementById('registerStudentBtn');

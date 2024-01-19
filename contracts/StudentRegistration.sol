@@ -15,6 +15,8 @@ contract StudentRegistration {
     event StudentRegistered(uint256 indexed id, string name, address studentAddress);
 
     function registerStudent(string memory _name) public {
+        require(studentIds[msg.sender] == 0, "Address has already registered a student");
+
         studentCount++;
         students[studentCount] = Student(studentCount, _name, msg.sender);
         studentIds[msg.sender] = studentCount;
