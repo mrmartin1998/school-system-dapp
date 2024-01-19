@@ -13,6 +13,26 @@
   - Write initial tests for the Registration Contract in Truffle.
   - Create a basic HTML front-end for student registration.
 
+## Sprint 1 Completion Recap
+
+### Developed the Student Registration Contract
+- Created a `StudentRegistration` smart contract with functionalities for:
+  - Registering students.
+  - Retrieving student information.
+- Implemented checks to prevent duplicate registrations by the same address.
+
+### Wrote Initial Tests for the Registration Contract in Truffle
+- Conducted tests to ensure the smart contract functions as expected.
+- Validated the new logic to prevent duplicate registrations.
+- Tests are crucial for verifying contract integrity and behavior.
+
+### Created a Basic HTML Front-end for Student Registration
+- Developed an `index.html` page for:
+  - Simple user interface for registering students.
+  - Interface for retrieving student information.
+- Integrated `app.js` script with MetaMask to interact with the smart contract via a web browser.
+
+
 ### Sprint 2: Test Management Contract and UI
 - **Tasks:**
   - Develop the Test Management Contract.
