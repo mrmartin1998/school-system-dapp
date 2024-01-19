@@ -3,19 +3,28 @@ const GradeManagement = artifacts.require("GradeManagement");
 const PointsManagement = artifacts.require("PointsManagement");
 // Include other contracts as needed, like TestManagement
 
-module.exports = function (deployer) {
-  // Deploy the StudentRegistration contract first
-  deployer.deploy(StudentRegistration).then(function() {
-    // After StudentRegistration is deployed, deploy GradeManagement
-    // Pass the address of StudentRegistration to GradeManagement's constructor
-    return deployer.deploy(GradeManagement, StudentRegistration.address);
-  }).then(function() {
-    // Similarly, deploy PointsManagement
-    // You can pass StudentRegistration's address if required
-    return deployer.deploy(PointsManagement, StudentRegistration.address);
-  });
-  // Continue with other contracts in a similar fashion
-  // .then(function() {
-  //   return deployer.deploy(OtherContract, SomeDependency.address);
-  // });
+module.exports = async function(deployer) {
+    try {
+        // Deploy the StudentRegistration contract
+        await deployer.deploy(StudentRegistration);
+        const studentRegInstance = await StudentRegistration.deployed();
+
+        // Deploy the GradeManagement contract
+        await deployer.deploy(GradeManagement, studentRegInstance.address);
+        const gradeMgmtInstance = await GradeManagement.deployed();
+
+        // Deploy the PointsManagement contract
+        await deployer.deploy(PointsManagement, studentRegInstance.address);
+        const pointsMgmtInstance = await PointsManagement.deployed();
+        
+        // Output the addresses of the deployed contracts
+        console.log("Deployed addresses:");
+        console.log(`StudentRegistration: ${studentRegInstance.address}`);
+        console.log(`GradeManagement: ${gradeMgmtInstance.address}`);
+        console.log(`PointsManagement: ${pointsMgmtInstance.address}`);
+        // Include other contracts similarly
+
+    } catch (error) {
+        console.error("Error deploying contracts:", error);
+    }
 };
