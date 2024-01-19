@@ -18,202 +18,65 @@ window.addEventListener('load', async () => {
         console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
     }
 
-    // Your deployed contract addresses
+    // Contract addresses
     const studentRegistrationAddress = '0x61d8fEC7E5E752aAa4D80E577E4131E6783F80DA';
+    const testManagementAddress = 'Your_TestManagement_Contract_Address';
 
-    // The ABI for your contracts
-    const studentRegistrationABI =  [
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": true,
-              "internalType": "uint256",
-              "name": "id",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "string",
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "studentAddress",
-              "type": "address"
-            }
-          ],
-          "name": "StudentRegistered",
-          "type": "event"
-        },
-        {
-          "inputs": [],
-          "name": "studentCount",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function",
-          "constant": true
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "name": "studentIds",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function",
-          "constant": true
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "name": "students",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "id",
-              "type": "uint256"
-            },
-            {
-              "internalType": "string",
-              "name": "name",
-              "type": "string"
-            },
-            {
-              "internalType": "address",
-              "name": "studentAddress",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function",
-          "constant": true
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "_name",
-              "type": "string"
-            }
-          ],
-          "name": "registerStudent",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_id",
-              "type": "uint256"
-            }
-          ],
-          "name": "getStudent",
-          "outputs": [
-            {
-              "components": [
-                {
-                  "internalType": "uint256",
-                  "name": "id",
-                  "type": "uint256"
-                },
-                {
-                  "internalType": "string",
-                  "name": "name",
-                  "type": "string"
-                },
-                {
-                  "internalType": "address",
-                  "name": "studentAddress",
-                  "type": "address"
-                }
-              ],
-              "internalType": "struct StudentRegistration.Student",
-              "name": "",
-              "type": "tuple"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function",
-          "constant": true
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
-              "name": "_studentId",
-              "type": "uint256"
-            }
-          ],
-          "name": "isStudentRegistered",
-          "outputs": [
-            {
-              "internalType": "bool",
-              "name": "",
-              "type": "bool"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function",
-          "constant": true
-        }
-      ];
+    // ABIs for contracts
+    const studentRegistrationABI = [ /* ...StudentRegistration ABI... */ ];
+    const testManagementABI = [ /* ...TestManagement Contract ABI... */ ];
 
     // Contract instances
     const studentRegistration = new web3.eth.Contract(studentRegistrationABI, studentRegistrationAddress);
+    const testManagement = new web3.eth.Contract(testManagementABI, testManagementAddress);
 
-    // UI Elements
+    // UI Elements for Student Registration
     const registerStudentBtn = document.getElementById('registerStudentBtn');
     const getStudentInfoBtn = document.getElementById('getStudentInfoBtn');
 
-    // Event listeners
+    // UI Elements for Test Management
+    const createTestBtn = document.getElementById('createTestBtn');
+    const submitScoreBtn = document.getElementById('submitScoreBtn');
+
+    // Event listener for registering a student
     registerStudentBtn.addEventListener('click', async () => {
         const name = document.getElementById('studentName').value;
         const accounts = await web3.eth.getAccounts();
-        // Call the smart contract to register the student, use the first account
         studentRegistration.methods.registerStudent(name).send({ from: accounts[0] })
-            .then(result => {
-                console.log(result);
-            }).catch(error => {
-                console.error(error);
-            });
+            .then(result => console.log(result))
+            .catch(error => console.error(error));
     });
 
+    // Event listener for getting student information
     getStudentInfoBtn.addEventListener('click', async () => {
         const studentId = document.getElementById('studentId').value;
-        // Call the smart contract to get student info
         studentRegistration.methods.getStudent(studentId).call()
             .then(result => {
                 document.getElementById('studentInfo').innerText = `Name: ${result.name}`;
-            }).catch(error => {
-                console.error(error);
-            });
+            })
+            .catch(error => console.error(error));
     });
 
-    // Add more functionalities and event listeners as needed
+    // Event listener for creating a test
+    createTestBtn.addEventListener('click', async () => {
+        const testName = document.getElementById('testName').value;
+        const accounts = await web3.eth.getAccounts();
+        testManagement.methods.createTest(testName).send({ from: accounts[0] })
+            .then(result => console.log(result))
+            .catch(error => console.error(error));
+    });
+
+    // Event listener for submitting a test score
+    submitScoreBtn.addEventListener('click', async () => {
+        const testId = document.getElementById('testId').value;
+        const score = document.getElementById('studentScore').value;
+        // Retrieve student ID based on your application logic
+        const studentId = /* Implement logic to get student ID */;
+        const accounts = await web3.eth.getAccounts();
+        testManagement.methods.recordTestScore(testId, studentId, score).send({ from: accounts[0] })
+            .then(result => console.log(result))
+            .catch(error => console.error(error));
+    });
+
+    // ... (any additional functionalities) ...
 });
