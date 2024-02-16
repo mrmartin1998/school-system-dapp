@@ -10,7 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/web3@1.3.0/dist/web3.min.js"></script>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">School System DApp</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,14 +17,14 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="#registration">Register Student</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#registration-section">Register Student</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#student-info">Student Info</a>
+                    <a class="nav-link" href="#student-info-section">Student Info</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#test-management">Test Management</a>
+                    <a class="nav-link" href="#test-management-section">Test Management</a>
                 </li>
             </ul>
         </div>
@@ -33,14 +32,14 @@
 
     <div class="container mt-5">
         <!-- Student Registration Form -->
-        <div id="registration" class="mb-4">
+        <div id="registration-section" class="mb-4">
             <h2>Register Student</h2>
             <input type="text" id="studentName" class="form-control mb-2" placeholder="Student Name">
             <button id="registerStudentBtn" class="btn btn-primary">Register</button>
         </div>
 
         <!-- Display Student Info -->
-        <div id="student-info" class="mb-4">
+        <div id="student-info-section" class="mb-4 d-none">
             <h2>Student Information</h2>
             <input type="number" id="studentId" class="form-control mb-2" placeholder="Student ID">
             <button id="getStudentInfoBtn" class="btn btn-primary">Get Student Info</button>
@@ -48,7 +47,7 @@
         </div>
 
         <!-- Test Management Section -->
-        <div id="test-management">
+        <div id="test-management-section" class="mb-4 d-none">
             <!-- Test Creation Form -->
             <div class="mb-4">
                 <h2>Create Test</h2>
@@ -71,7 +70,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <!-- Include app.js -->
+    <script>
+        // JavaScript for navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                // Hide all sections
+                document.querySelectorAll('.container > div').forEach(div => div.classList.add('d-none'));
+                // Show the selected section
+                const sectionId = event.target.getAttribute('href').substring(1);
+                document.getElementById(sectionId).classList.remove('d-none');
+            });
+        });
+    </script>
     <script src="app.js"></script>
 </body>
 </html>
