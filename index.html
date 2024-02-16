@@ -4,46 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>School System DApp</title>
+    <!-- Include Bootstrap CSS from a CDN for styling -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <!-- Include Web3.js from a CDN -->
     <script src="https://cdn.jsdelivr.net/npm/web3@1.3.0/dist/web3.min.js"></script>
 </head>
 <body>
-    <h1>School System DApp</h1>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">School System DApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#registration">Register Student</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#student-info">Student Info</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#test-management">Test Management</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-    <!-- Student Registration Form -->
-    <div>
-        <h2>Register Student</h2>
-        <input type="text" id="studentName" placeholder="Student Name">
-        <button id="registerStudentBtn">Register</button>
+    <div class="container mt-5">
+        <!-- Student Registration Form -->
+        <div id="registration" class="mb-4">
+            <h2>Register Student</h2>
+            <input type="text" id="studentName" class="form-control mb-2" placeholder="Student Name">
+            <button id="registerStudentBtn" class="btn btn-primary">Register</button>
+        </div>
+
+        <!-- Display Student Info -->
+        <div id="student-info" class="mb-4">
+            <h2>Student Information</h2>
+            <input type="number" id="studentId" class="form-control mb-2" placeholder="Student ID">
+            <button id="getStudentInfoBtn" class="btn btn-primary">Get Student Info</button>
+            <p id="studentInfo" class="mt-2"></p>
+        </div>
+
+        <!-- Test Management Section -->
+        <div id="test-management">
+            <!-- Test Creation Form -->
+            <div class="mb-4">
+                <h2>Create Test</h2>
+                <input type="text" id="testName" class="form-control mb-2" placeholder="Test Name">
+                <button id="createTestBtn" class="btn btn-primary">Create Test</button>
+            </div>
+
+            <!-- Test Taking Form -->
+            <div class="mb-4">
+                <h2>Take Test</h2>
+                <input type="number" id="testId" class="form-control mb-2" placeholder="Test ID">
+                <input type="number" id="studentScore" class="form-control mb-2" placeholder="Score">
+                <button id="submitScoreBtn" class="btn btn-primary">Submit Score</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Display Student Info -->
-    <div>
-        <h2>Student Information</h2>
-        <input type="number" id="studentId" placeholder="Student ID">
-        <button id="getStudentInfoBtn">Get Student Info</button>
-        <p id="studentInfo"></p>
-    </div>
+    <!-- Include Bootstrap JS and Popper.js for responsive features -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <!-- Add this section to your existing index.html -->
-
-<!-- Test Creation Form -->
-<div>
-    <h2>Create Test</h2>
-    <input type="text" id="testName" placeholder="Test Name">
-    <button id="createTestBtn">Create Test</button>
-</div>
-
-<!-- Display Test Info -->
-<div>
-    <h2>Take Test</h2>
-    <input type="number" id="testId" placeholder="Test ID">
-    <input type="number" id="studentScore" placeholder="Score">
-    <button id="submitScoreBtn">Submit Score</button>
-</div>
-
-
-    <!-- Include more functionalities as needed -->
+    <!-- Include app.js -->
     <script src="app.js"></script>
 </body>
 </html>
