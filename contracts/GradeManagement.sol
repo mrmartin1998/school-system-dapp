@@ -6,7 +6,13 @@ import "./StudentRegistration.sol";
 contract GradeManagement {
     StudentRegistration studentRegistration;
 
-    mapping(uint256 => uint256) public grades;
+    // New structure for grades to include multiple subjects
+    struct Grade {
+        mapping(string => uint256) subjectGrades; // subject name to grade mapping
+    }
+
+    // Change visibility to private or internal
+    mapping(uint256 => Grade) private studentGrades;
 
     modifier onlyAuthorized() {
         // Implement your logic for authorization
@@ -17,14 +23,19 @@ contract GradeManagement {
         studentRegistration = StudentRegistration(studentRegAddress);
     }
 
-    function recordGrade(uint256 _studentId, uint256 _grade) public onlyAuthorized {
+    function recordGrade(uint256 _studentId, string memory _subject, uint256 _grade) public onlyAuthorized {
         require(studentRegistration.isStudentRegistered(_studentId), "Student not registered");
-        grades[_studentId] = _grade;
-        // Emit an event here if needed
+        studentGrades[_studentId].subjectGrades[_subject] = _grade;
     }
 
-    function getGrade(uint256 _studentId) public view returns (uint256) {
+    function getGrade(uint256 _studentId, string memory _subject) public view returns (uint256) {
         require(studentRegistration.isStudentRegistered(_studentId), "Student not registered");
-        return grades[_studentId];
+        return studentGrades[_studentId].subjectGrades[_subject];
+    }
+
+    // Public function to access grades
+    function getStudentGrades(uint256 _studentId, string memory _subject) public view returns (uint256) {
+        require(studentRegistration.isStudentRegistered(_studentId), "Student not registered");
+        return studentGrades[_studentId].subjectGrades[_subject];
     }
 }

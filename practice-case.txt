@@ -1,0 +1,95 @@
+Practice Case
+In our practice scenario, we simulate a school environment with students, teachers, and administrative staff. The system manages student registrations, test scores, grades, and extra points for various activities. This practice case will help in understanding the application of blockchain in educational settings.
+
+Scenario Outline
+Number of Students: 10
+Subjects: 6
+Homework and Exams: Contribute to the final grade.
+Additional Points: Awarded for activities outside the curriculum.
+Workflow
+Student Onboarding: Students are registered using the StudentRegistration contract.
+Test Administration: Teachers create and manage tests using the TestManagement contract.
+Grading System: Grades for various subjects are recorded through the GradeManagement contract.
+Points System: Points are awarded to students for extracurricular activities using the PointsManagement contract.
+This practice case provides a foundation for expanding the system to include more complex functionalities like NFTs, real-time test-taking, and more.
+
+
+# Blockchain-Based School System
+
+A comprehensive structure for a decentralized school system on the blockchain. This system includes student management, subject handling, homework, exams, and additional grading elements.
+
+## Project Components
+
+### 1. **Student Management**
+
+- **Smart Contract: `StudentRegistration`**
+  - **Functions:**
+    - `registerStudent(name)`: Registers a new student with a unique ID.
+    - `getStudent(studentId)`: Retrieves student details.
+  - **Data Storage:**
+    - `students`: Mapping of student IDs to student details (name, ID).
+
+### 2. **Subject Management**
+
+- **Smart Contract: `SubjectManagement`**
+  - **Functions:**
+    - `addSubject(subjectName)`: Adds a new subject.
+    - `getSubject(subjectId)`: Retrieves subject details.
+  - **Data Storage:**
+    - `subjects`: Mapping of subject IDs to subject details (name, ID).
+
+### 3. **Homework Management**
+
+- **Smart Contract: `HomeworkManagement`**
+  - **Functions:**
+    - `assignHomework(studentId, subjectId, homeworkDetails)`: Assigns homework to a student for a specific subject.
+    - `submitHomework(studentId, subjectId, score)`: Records the score of submitted homework.
+  - **Data Storage:**
+    - `homeworkRecords`: Mapping of student and subject IDs to homework scores.
+
+### 4. **Exam Management**
+
+- **Smart Contract: `ExamManagement`**
+  - **Functions:**
+    - `conductExam(subjectId, examDetails)`: Conducts an exam for a specific subject.
+    - `recordExamScore(studentId, subjectId, score)`: Records the score of an exam.
+  - **Data Storage:**
+    - `examScores`: Mapping of student and subject IDs to exam scores.
+
+### 5. **Overall Grading System**
+
+- **Smart Contract: `GradingSystem`**
+  - **Functions:**
+    - `calculateFinalGrade(studentId, subjectId)`: Calculates the final grade for a student in a subject.
+    - `updateAdditionalPoints(studentId, subjectId, points)`: Adds additional points to a student's grade.
+  - **Data Storage:**
+    - `finalGrades`: Mapping of student and subject IDs to final grades.
+
+### 6. **Additional Points System**
+
+- **Smart Contract: `AdditionalPointsSystem`**
+  - **Functions:**
+    - `awardPoints(studentId, subjectId, points)`: Awards additional points to a student for a subject.
+  - **Data Storage:**
+    - `additionalPoints`: Mapping of student and subject IDs to additional points.
+
+### 7. **Front-End Interface**
+
+- Pages for Student Registration, Subject Management, Homework Assignment/Submission, Exam Management, Grading System Overview, and Student Dashboard.
+
+### 8. **Middleware Integration**
+
+- Connection between front-end and smart contracts.
+- Handling of data input/output from Ethereum blockchain.
+- Implementation of business logic (e.g., grade calculation).
+
+### 9. **Testing and Deployment**
+
+- Test each smart contract individually and in combination.
+- Deploy contracts on a test network for trial runs.
+- Gather feedback and iterate.
+
+### 10. **Documentation**
+
+- Document all aspects of the system.
+- Provide clear instructions for usage and maintenance.
