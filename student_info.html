@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School System dApp</title>
+    <!-- Include your CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="registration.html">Register Student</a></li>
+            <li><a href="student_info.html">Student Info</a></li>
+            <li><a href="test_management.html">Test Management</a></li>
+            <!-- Add other navigation links as required -->
+        </ul>
+    </nav>
+
+    <div id="student-info-section" class="mb-4 d-none">
+        <h2>Student Information</h2>
+        <input type="number" id="studentId" class="form-control mb-2" placeholder="Student ID">
+        <button id="getStudentInfoBtn" class="btn btn-primary">Get Student Info</button>
+        <p id="studentInfo" class="mt-2"></p>
+    </div>
+
+    <!-- Include your JS file -->
+    <script src="app.js"></script>
+</body>
+</html>

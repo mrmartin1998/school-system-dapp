@@ -9,7 +9,7 @@ contract HomeworkManagement {
     struct Homework {
         uint256 id;
         string description;
-        uint256 dueDate; // Unix timestamp
+        uint256 dueDate;
     }
 
     uint256 public homeworkCount = 0;
@@ -41,4 +41,16 @@ contract HomeworkManagement {
         require(studentRegistration.isStudentRegistered(_studentId), "Student not registered");
         return studentHomeworkCompletion[_studentId][_homeworkId];
     }
+
+    // Function to return a list of homework IDs and completion status
+    function getHomeworkStatusesForStudent(uint256 _studentId, uint256[] memory _homeworkIds) public view returns (bool[] memory) {
+        require(studentRegistration.isStudentRegistered(_studentId), "Student not registered");
+
+        bool[] memory statuses = new bool[](_homeworkIds.length);
+        for (uint i = 0; i < _homeworkIds.length; i++) {
+            statuses[i] = studentHomeworkCompletion[_studentId][_homeworkIds[i]];
+        }
+        return statuses;
+    }
+
 }
